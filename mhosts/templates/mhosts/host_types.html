@@ -7,7 +7,7 @@
   <ul>
     {% for host_type in host_types %}
       <li>
-        {{ host_type }}
+        <a href="{% url 'mhosts:host_type' host_type.id %}">{{ host_type }}</a>
 	  </li>
     {% empty %}
       <li>No host_types have been added yet.</li>

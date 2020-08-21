@@ -1,0 +1,23 @@
+{% extends 'mhosts/base.html' %}
+
+{% block content %}
+
+  <p>Host_type: {{ host_type }}</p>
+
+  <p>hosts:</p>
+  <ul>
+  {% for host in hosts %}
+    <li>
+      <p>{{ host.date_added|date:'M d, Y H:i' }}</p>
+      <p>{{ host.text|linebreaks }}</p>
+      <p>{{ host.host_name|linebreaks }}</p>
+      <p>{{ host.host_ip|linebreaks }}</p>
+    </li>
+  {% empty %}
+    <li>
+      There are no hosts for this host_type yet.
+    </li>
+  {% endfor %}
+  </ul>
+
+{% endblock content %}
