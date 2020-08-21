@@ -1,0 +1,13 @@
+cdjango 1.8
+
+Topics : host_type
+
+add new topic : add new host_type
+
+
+topic: windows,linux
+
+add new entry:  add new host
+edit entry:  adit host
+尚未定义	:  connect
+未定义	:  exit

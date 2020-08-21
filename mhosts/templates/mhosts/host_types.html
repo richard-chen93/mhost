@@ -1,0 +1,17 @@
+{% extends "mhosts/base.html" %}
+
+{% block content %}
+
+  <p>Host_types</p>
+
+  <ul>
+    {% for host_type in host_types %}
+      <li>
+        {{ host_type }}
+	  </li>
+    {% empty %}
+      <li>No host_types have been added yet.</li>
+    {% endfor %}
+  </ul>
+
+{% endblock content %}
