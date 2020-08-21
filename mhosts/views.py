@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from .models import Group
-from .forms import GroupForm
+from .models import Group,Host
+from .forms import GroupForm,HostForm
 
 
 def index(request):
@@ -45,16 +45,16 @@ def new_group(request):
 
 def new_host(request, group_id):
     """Add a new host for a particular group."""
-    group = Topic.objects.get(id=group_id)
+    group = Group.objects.get(id=group_id)
     if group.owner != request.user:
         raise Http404
 
     if request.method != 'POST':
         # No data submitted; create a blank form.
-        form = EntryForm()
+        form = HostForm()
     else:
         # POST data submitted; process data.
-        form = EntryForm(data=request.POST)
+        form = HostForm(data=request.POST)
         if form.is_valid():
             new_host = form.save(commit=False)
             new_host.group = group
