@@ -1,0 +1,12 @@
+{% extends "mhosts/base.html" %}
+
+{% block content %}
+  <p>Add a new group:</p>
+
+  <form action="{% url 'mhosts:new_group' %}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">add group</button>
+  </form>
+    
+{% endblock content %}
