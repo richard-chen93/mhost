@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Host_type(models.Model):
+class Group(models.Model):
     """A topic the user is learning about."""
     text = models.CharField(max_length=200)
     date_added = models.DateTimeField(auto_now_add=True)
@@ -12,7 +12,7 @@ class Host_type(models.Model):
 
 class Host(models.Model):
     """Something specific learned about a topic."""
-    host_type = models.ForeignKey(Host_type)
+    group = models.ForeignKey(Group)
     text = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
 

@@ -1,0 +1,17 @@
+{% extends "mhosts/base.html" %}
+
+{% block content %}
+
+  <p>Groups</p>
+
+  <ul>
+    {% for group in groups %}
+      <li>
+        <a href="{% url 'mhosts:group' group.id %}">{{ group }}</a>
+	  </li>
+    {% empty %}
+      <li>No groups have been added yet.</li>
+    {% endfor %}
+  </ul>
+
+{% endblock content %}

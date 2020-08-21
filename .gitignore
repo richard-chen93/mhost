@@ -1,5 +1,6 @@
-ll_env/
+cll_env/
 __pycache__/
 *.sqlite3
 env_mhost/
 evn*/
+.vscode

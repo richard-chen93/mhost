@@ -11,29 +11,25 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Host',
+            name='Group',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
-                ('text', models.TextField()),
-                ('date_added', models.DateTimeField(auto_now_add=True)),
-                ('host_name', models.CharField(max_length=200)),
-                ('host_ip', models.CharField(max_length=200)),
-            ],
-            options={
-                'verbose_name_plural': 'hosts',
-            },
-        ),
-        migrations.CreateModel(
-            name='Host_type',
-            fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
                 ('text', models.CharField(max_length=200)),
                 ('date_added', models.DateTimeField(auto_now_add=True)),
             ],
         ),
-        migrations.AddField(
-            model_name='host',
-            name='host_type',
-            field=models.ForeignKey(to='mhosts.Host_type'),
+        migrations.CreateModel(
+            name='Host',
+            fields=[
+                ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
+                ('text', models.TextField()),
+                ('date_added', models.DateTimeField(auto_now_add=True)),
+                ('host_name', models.CharField(max_length=200)),
+                ('host_ip', models.CharField(max_length=200)),
+                ('group', models.ForeignKey(to='mhosts.Group')),
+            ],
+            options={
+                'verbose_name_plural': 'hosts',
+            },
         ),
     ]

@@ -2,7 +2,7 @@
 
 {% block content %}
 
-  <p>Host_type: {{ host_type }}</p>
+  <p>Group: {{ group }}</p>
 
   <p>hosts:</p>
   <ul>
@@ -15,7 +15,7 @@
     </li>
   {% empty %}
     <li>
-      There are no hosts for this host_type yet.
+      There are no hosts for this group yet.
     </li>
   {% endfor %}
   </ul>
