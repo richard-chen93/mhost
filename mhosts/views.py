@@ -22,6 +22,9 @@ def groups(request):
 def group(request, group_id):
     """Show a single group, and all its hosts."""
     group = Group.objects.get(id=group_id)
+    #确认请求的主题属于当前用户
+    if group.owner != request.user:
+        raise Http404
     hosts = group.host_set.order_by('-date_added')
     context = {'group': group, 'hosts': hosts}
     return render(request, 'mhosts/group.html', context)
