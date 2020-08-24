@@ -1,6 +1,3 @@
-cdjango 1.8
-
-Topic >  Group
-topic > group
-尚未定义:  connect
-未定义	:  exit
+django 1.8.4
+python 3.4.3
+ssh或rdp尚未实现

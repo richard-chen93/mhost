@@ -5,6 +5,9 @@
   <p>Group: {{ group }}</p>
 
   <p>hosts:</p>
+  <p>
+    <a href="{% url 'mhosts:new_host' group.id %}">add new host</a>
+  </p>
   <ul>
   {% for host in hosts %}
     <li>
@@ -12,6 +15,9 @@
       <p>{{ host.text|linebreaks }}</p>
       <p>{{ host.host_name|linebreaks }}</p>
       <p>{{ host.host_ip|linebreaks }}</p>
+      <p>
+        <a href="{% url 'mhosts:edit_host' host.id %}">edit host</a>
+      </p>
     </li>
   {% empty %}
     <li>

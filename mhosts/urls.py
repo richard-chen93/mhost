@@ -1,4 +1,4 @@
-"""Defines url patterns for learning_logs."""
+"""Defines url patterns for mhosts."""
 
 from django.conf.urls import url
 
@@ -19,7 +19,6 @@ urlpatterns = [
     #Page for adding a new host.
     url(r'^new_host/(?P<group_id>\d+)/$', views.new_host, name='new_host'),
     
-    # # Page for editing an host.
-    # url(r'^edit_host/(?P<host_id>\d+)/$', views.edit_host,
-    #     name='edit_host'),
+    # Page for editing an host.
+    url(r'^edit_host/(?P<host_id>\d+)/$', views.edit_host, name='edit_host'),
 ]
