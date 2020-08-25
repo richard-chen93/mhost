@@ -57,13 +57,17 @@ def new_host(request, group_id):
     if request.method != 'POST':
         # No data submitted; create a blank form.
         form = HostForm()
+
     else:
         # POST data submitted; process data.
         form = HostForm(data=request.POST)
+
+        
         if form.is_valid():
             new_host = form.save(commit=False)
             new_host.group = group
             new_host.save()
+
             return HttpResponseRedirect(reverse('mhosts:group',
                                                 args=[group_id]))
 

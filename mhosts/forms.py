@@ -11,6 +11,6 @@ class GroupForm(forms.ModelForm):
 class HostForm(forms.ModelForm):
     class Meta:
         model = Host
-        fields = ['text']
-        labels = {'text': ''}
-        widgets = {'text': forms.Textarea(attrs={'cols': 80})}
+        fields = ['text', 'host_name', 'host_ip']
+        # labels = {'text': ''}
+        widgets = {'text': forms.Textarea(attrs={'cols': 20})}

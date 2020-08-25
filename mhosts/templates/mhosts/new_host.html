@@ -8,6 +8,8 @@
   <form action="{% url 'mhosts:new_host' group.id %}" method='post'>
     {% csrf_token %}
     {{ form.as_p }}
+    {{ form_name.as_p }}
+
     <button name='submit'>add host</button>
   </form>
     

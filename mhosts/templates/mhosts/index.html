@@ -1,5 +1,17 @@
 {% extends "mhosts/base.html" %}
 
+{% block header %}
+  <div class='jumbotron'>
+      <h1>Manage your host.</h1>        
+  </div>
+{% endblock %}
+
 {% block content %}
-  <p>This site helps you connect to your hosts.</p>
-{% endblock content %}
+  <h2>
+    <a href="{% url 'users:register' %}">Register an account</a> to manage your
+    hosts.
+  </h2>
+  <h2>
+    With this website, you can click the host link to access your host via ssh or rdp.
+  </h2>
+{% endblock %}
