@@ -21,4 +21,7 @@ urlpatterns = [
     
     # Page for editing an host.
     url(r'^edit_host/(?P<host_id>\d+)/$', views.edit_host, name='edit_host'),
+
+    #connect to your host
+    url(r'^categoria/([0-9]+)/$', views.connect, name='connect'),
 ]

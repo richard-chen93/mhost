@@ -13,17 +13,18 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3>
-          {{ host.date_added|date:'M d, Y H:i' }}
+          {{ host.host_name }}
           <small>
             <a href="{% url 'mhosts:edit_host' host.id %}">
-              edit host</a>
+              edit_host</a>
+            <a href="{% url 'mhosts:connect' host.id %}">
+              connect</a>
           </small>
         </h3>
       </div>
       <div class="panel-body">
-        {{ host.text|linebreaks }}
-        {{ host.host_name|linebreaks }}
         {{ host.host_ip|linebreaks }}
+        {{ host.text|linebreaks }}
       </div>
     </div> <!-- panel -->
   {% empty %}

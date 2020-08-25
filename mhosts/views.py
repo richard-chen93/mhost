@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect,Http404
+from django.http import HttpResponseRedirect,Http404,HttpResponse
 from django.core.urlresolvers import reverse
 from .models import Group,Host
 from .forms import GroupForm,HostForm
@@ -95,3 +95,52 @@ def edit_host(request, host_id):
     
     context = {'host': host, 'group': group, 'form': form}
     return render(request, 'mhosts/edit_host.html', context)
+
+
+#调用power shell进行远程桌面连接
+import subprocess
+
+
+def python_call_powershell(ip):
+    try:
+        args = [r"powershell", r"mstsc", r"/v:" + ip, r"/f"]
+        p = subprocess.Popen(args, stdout=subprocess.PIPE)
+        dt = p.stdout.read()
+        return dt
+    except Exception as e:
+        print(e)
+    return False
+
+
+def add_cmdkey(ip):
+    try:
+        username = r"cn04-corp\opm"
+        password = "123.com"
+        args = [
+            r"powershell", r"cmdkey", r"/generic:TERMSRV/" + ip,
+            r"/user:" + username, r"/pass:" + password
+        ]
+        p = subprocess.Popen(args, stdout=subprocess.PIPE)
+        dt = p.stdout.read()
+
+        # python_call_powershell(ip)
+
+        return dt
+    except Exception as e:
+        print(e)
+    return False
+
+@login_required
+def connect(request, host_id):
+    """connect to the host."""
+    host = Host.objects.get(id=host_id)
+    ip = host.host_ip
+    group = host.group
+    if group.owner != request.user:
+        raise Http404
+    
+    if request.method != 'POST':
+        add_cmdkey(ip)
+        python_call_powershell(ip)
+        return HttpResponseRedirect(reverse('mhosts:group',
+                                        args=[group.id]))
