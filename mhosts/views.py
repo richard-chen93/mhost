@@ -13,9 +13,19 @@ def index(request):
 
 @login_required
 def groups(request):
-    """Show all group."""
+    """Show all groups, and os_type"""
     groups = Group.objects.filter(owner=request.user).order_by('date_added')
+
+    ##
+    # o = []
+    # grp = Group.objects.filter(owner=request.user).order_by('date_added').values()
+    # for i in grp:
+    #     o.append(i['os_type'])
+
+
+    ##
     context = {'groups': groups}
+    # context = {'groups': groups, 'o': o}
     return render(request, 'mhosts/groups.html', context)
 
 @login_required
@@ -123,7 +133,6 @@ def add_cmdkey(ip):
         p = subprocess.Popen(args, stdout=subprocess.PIPE)
         dt = p.stdout.read()
 
-        # python_call_powershell(ip)
 
         return dt
     except Exception as e:
@@ -134,13 +143,22 @@ def add_cmdkey(ip):
 def connect(request, host_id):
     """connect to the host."""
     host = Host.objects.get(id=host_id)
+
     ip = host.host_ip
     group = host.group
+
     if group.owner != request.user:
         raise Http404
     
-    if request.method != 'POST':
+    #若主机所属组是windows类型，调用远程桌面连接
+    if group.os_type == 'windows':
         add_cmdkey(ip)
         python_call_powershell(ip)
         return HttpResponseRedirect(reverse('mhosts:group',
                                         args=[group.id]))
+
+        
+    #否则调用ssh连接主机
+    else:
+        return HttpResponse("not a windows host")
+

@@ -1,8 +1,5 @@
 import subprocess
 
-
-
-
 def python_call_powershell(ip):
     try:
         args = [r"powershell", r"mstsc", r"/v:" + ip, r"/f"]
@@ -12,7 +9,6 @@ def python_call_powershell(ip):
     except Exception as e:
         print(e)
     return False
-
 
 def add_cmdkey(ip):
     try:

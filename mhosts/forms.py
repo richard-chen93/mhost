@@ -5,12 +5,12 @@ from .models import Group, Host
 class GroupForm(forms.ModelForm):
     class Meta:
         model = Group
-        fields = ['text']
-        labels = {'text': ''}
+        fields = ['text','os_type']
+        labels = {'text': 'group name'}
 
 class HostForm(forms.ModelForm):
     class Meta:
         model = Host
         fields = ['text', 'host_name', 'host_ip']
-        # labels = {'text': ''}
+        labels = {'text': 'description'}
         widgets = {'text': forms.Textarea(attrs={'cols': 20})}
