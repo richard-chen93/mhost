@@ -1,6 +1,7 @@
 """Defines url patterns for mhosts."""
 
 from django.conf.urls import url
+from django.conf.urls.static import static
 
 from . import views
 
@@ -24,4 +25,5 @@ urlpatterns = [
 
     #connect to your host
     url(r'^categoria/([0-9]+)/$', views.connect, name='connect'),
-]
+] + static("mstsc", document_root="./mhosts/static")
+

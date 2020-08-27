@@ -1,8 +1,9 @@
+import subprocess
 from django.shortcuts import render
-from django.http import HttpResponseRedirect,Http404,HttpResponse
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.core.urlresolvers import reverse
-from .models import Group,Host
-from .forms import GroupForm,HostForm
+from .models import Group, Host
+from .forms import GroupForm, HostForm
 
 from django.contrib.auth.decorators import login_required
 
@@ -10,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     """The home page for mhost."""
     return render(request, 'mhosts/index.html')
+
 
 @login_required
 def groups(request):
@@ -22,17 +24,17 @@ def groups(request):
     # for i in grp:
     #     o.append(i['os_type'])
 
-
     ##
     context = {'groups': groups}
     # context = {'groups': groups, 'o': o}
     return render(request, 'mhosts/groups.html', context)
 
+
 @login_required
 def group(request, group_id):
     """Show a single group, and all its hosts."""
     group = Group.objects.get(id=group_id)
-    #确认请求的主题属于当前用户
+    # 确认请求的主题属于当前用户
     if group.owner != request.user:
         raise Http404
     hosts = group.host_set.order_by('-date_added')
@@ -57,6 +59,7 @@ def new_group(request):
     context = {'form': form}
     return render(request, 'mhosts/new_group.html', context)
 
+
 @login_required
 def new_host(request, group_id):
     """Add a new host for a particular group."""
@@ -72,7 +75,6 @@ def new_host(request, group_id):
         # POST data submitted; process data.
         form = HostForm(data=request.POST)
 
-        
         if form.is_valid():
             new_host = form.save(commit=False)
             new_host.group = group
@@ -84,6 +86,7 @@ def new_host(request, group_id):
     context = {'group': group, 'form': form}
     return render(request, 'mhosts/new_host.html', context)
 
+
 @login_required
 def edit_host(request, host_id):
     """Edit an existing host."""
@@ -91,7 +94,7 @@ def edit_host(request, host_id):
     group = host.group
     if group.owner != request.user:
         raise Http404
-    
+
     if request.method != 'POST':
         # Initial request; pre-fill form with the current host.
         form = HostForm(instance=host)
@@ -101,14 +104,13 @@ def edit_host(request, host_id):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('mhosts:group',
-                                        args=[group.id]))
-    
+                                                args=[group.id]))
+
     context = {'host': host, 'group': group, 'form': form}
     return render(request, 'mhosts/edit_host.html', context)
 
 
-#调用power shell进行远程桌面连接
-import subprocess
+# 调用power shell进行远程桌面连接
 
 
 def python_call_powershell(ip):
@@ -133,11 +135,11 @@ def add_cmdkey(ip):
         p = subprocess.Popen(args, stdout=subprocess.PIPE)
         dt = p.stdout.read()
 
-
         return dt
     except Exception as e:
         print(e)
     return False
+
 
 @login_required
 def connect(request, host_id):
@@ -146,19 +148,29 @@ def connect(request, host_id):
 
     ip = host.host_ip
     group = host.group
+    user = group.owner
+    
+    username = host.user_name
+    userpass = host.user_pass
+    
+    #username = "cn04-corp\\" + str(user)
 
     if group.owner != request.user:
         raise Http404
-    
-    #若主机所属组是windows类型，调用远程桌面连接
+
+    # 若主机所属组是windows类型，调用远程桌面连接
     if group.os_type == 'windows':
-        add_cmdkey(ip)
-        python_call_powershell(ip)
-        return HttpResponseRedirect(reverse('mhosts:group',
-                                        args=[group.id]))
+        #return HttpResponse(username)
+        # return render(request, 'mhosts/mstsc.html')
+        #return HttpResponseRedirect('/mstsc/mstsc.html')
+        #return render(request, 'mhosts/connect.html')
+        context = {'ip': ip, 'user':username, 'pass':userpass}
+        return render(request, 'mhosts/show.html', context)
 
-        
-    #否则调用ssh连接主机
+    # 否则调用ssh连接主机
     else:
-        return HttpResponse("not a windows host")
-
+        return HttpResponse("ssh is not available yet")
+        # add_cmdkey(ip)
+        # python_call_powershell(ip)
+        # return HttpResponseRedirect(reverse('mhosts:group',
+        # args=[group.id]))

@@ -20,9 +20,11 @@ class Host(models.Model):
     text = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
 
-    host_name = models.CharField(max_length=200)
-
-    host_ip = models.CharField(max_length=200)
+    host_name = models.CharField(max_length=50)
+    host_ip = models.CharField(max_length=50)
+    
+    user_name = models.CharField(max_length=50)
+    user_pass = models.CharField(max_length=50)
 
     class Meta:
         verbose_name_plural = 'hosts'
