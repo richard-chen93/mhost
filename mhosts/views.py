@@ -145,14 +145,16 @@ def add_cmdkey(ip):
 def connect(request, host_id):
     """connect to the host."""
     host = Host.objects.get(id=host_id)
-
-    ip = host.host_ip
+    """find host query set in database"""
+    
     group = host.group
-    user = group.owner
+    group_user = group.owner
     
-    username = host.user_name
-    userpass = host.user_pass
-    
+    ip = host.host_ip
+    uid = host.id
+    uname = host.user_name
+    upass = host.user_pass
+
     #username = "cn04-corp\\" + str(user)
 
     if group.owner != request.user:
@@ -160,16 +162,17 @@ def connect(request, host_id):
 
     # 若主机所属组是windows类型，调用远程桌面连接
     if group.os_type == 'windows':
-        #return HttpResponse(username)
+        # return HttpResponse(username)
         # return render(request, 'mhosts/mstsc.html')
-        #return HttpResponseRedirect('/mstsc/mstsc.html')
-        #return render(request, 'mhosts/connect.html')
-        context = {'ip': ip, 'user':username, 'pass':userpass}
+        # return HttpResponseRedirect('/mstsc/mstsc.html')
+        # return render(request, 'mhosts/connect.html')
+        context = {'ip': ip, 'uname': uname, 'upass': upass}
         return render(request, 'mhosts/show.html', context)
 
     # 否则调用ssh连接主机
     else:
-        return HttpResponse("ssh is not available yet")
+        return render(request, 'mhosts/connect.html')
+        # return HttpResponse("ssh is not available yet")
         # add_cmdkey(ip)
         # python_call_powershell(ip)
         # return HttpResponseRedirect(reverse('mhosts:group',

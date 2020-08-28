@@ -17,7 +17,7 @@
           <small>
             <a href="{% url 'mhosts:edit_host' host.id %}">
               edit_host</a>
-            <a href="{% url 'mhosts:connect' host.id %}">
+            <a href="{% url 'mhosts:connect' host.id %}" target="_blank">
               connect</a>
           </small>
         </h3>
@@ -25,6 +25,7 @@
       <div class="panel-body">
         {{ host.host_ip|linebreaks }}
         {{ host.text|linebreaks }}
+        {{ host.id|linebreaks }}
       </div>
     </div> <!-- panel -->
   {% empty %}
