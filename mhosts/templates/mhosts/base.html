@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>mhost</title>
+    <title>Veoneer Server Login Platform</title>
 
     {% bootstrap_css %}
     {% bootstrap_javascript %}
@@ -24,12 +24,12 @@
                 aria-expanded="false" aria-controls="navbar">
             </button>
             <a class="navbar-brand" href="{% url 'mhosts:index' %}">
-                Manage Host</a>
+              Main Page</a>
           </div>
           
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="{% url 'mhosts:groups' %}">Groups</a></li>
+              <li><a href="{% url 'mhosts:groups' %}">Server Groups</a></li>
             </ul>
             
             <ul class="nav navbar-nav navbar-right">

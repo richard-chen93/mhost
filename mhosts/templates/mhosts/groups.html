@@ -10,10 +10,12 @@
     {% for group in groups %}
       <li>
         <h3>
+          <a>{{ o }}</a>
           <a href="{% url 'mhosts:group' group.id %}">{{ group }}</a>
+          <a href="{% url 'mhosts:edit_group' group.id %}">edit</a>
         </h3>
-        <a>{{ o }}</a>
       </li>
+
     {% empty %}
       <li>No groups have been added yet.</li>
     {% endfor %}

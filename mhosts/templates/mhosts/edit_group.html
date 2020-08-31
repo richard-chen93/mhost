@@ -1,0 +1,15 @@
+{% extends "mhosts/base.html" %}
+
+{% block content %}
+
+  <p><a href="{% url 'mhosts:groups' %}">{{ group }}</a></p>
+    
+  <p>Edit group:</p>
+    
+  <form action="{% url 'mhosts:edit_group' group.id %}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">save changes</button>
+  </form>
+
+{% endblock content %}

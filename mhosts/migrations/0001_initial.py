@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Group',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', auto_created=True, serialize=False)),
                 ('text', models.CharField(max_length=100)),
                 ('os_type', models.CharField(max_length=20, default='windows')),
                 ('date_added', models.DateTimeField(auto_now_add=True)),
@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Host',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', auto_created=True, serialize=False)),
                 ('text', models.TextField()),
                 ('date_added', models.DateTimeField(auto_now_add=True)),
                 ('host_name', models.CharField(max_length=50)),

@@ -60,6 +60,28 @@ def new_group(request):
     return render(request, 'mhosts/new_group.html', context)
 
 
+#新增编辑组
+@login_required
+def edit_group(request, group_id):
+    """Edit an existing group."""
+    group = Group.objects.get(id=group_id)
+    if group.owner != request.user:
+        raise Http404
+
+    if request.method != 'POST':
+        # Initial request; pre-fill form with the current group.
+        form = GroupForm(instance=group)
+    else:
+        # POST data submitted; process data.
+        form = GroupForm(instance=group, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('mhosts:groups'))
+
+    context = {'group': group, 'form': form}
+    return render(request, 'mhosts/edit_group.html', context)
+
+
 @login_required
 def new_host(request, group_id):
     """Add a new host for a particular group."""
@@ -108,6 +130,10 @@ def edit_host(request, host_id):
 
     context = {'host': host, 'group': group, 'form': form}
     return render(request, 'mhosts/edit_host.html', context)
+
+#帮助文件 配置IE浏览器
+def ieconfig(request):
+    return render(request, 'mhosts/ieconfig.html')
 
 
 # 调用power shell进行远程桌面连接
@@ -166,10 +192,11 @@ def connect(request, host_id):
         # return HttpResponseRedirect('/mstsc/mstsc.html')
         # return render(request, 'mhosts/connect.html')
         context = {'ip': ip, 'uname': uname, 'upass': upass}
-        return render(request, 'mhosts/show.html', context)
+        return render(request, 'mhosts/mstsc.html', context)
 
     # 否则调用ssh连接主机
     else:
-        #return render(request, 'mhosts/connect.html')
-         return HttpResponse("ssh is not available yet")
+        context = {'ip': ip, 'uname': uname, 'upass': upass}
+        return render(request, 'mhosts/ssh.html', context)
+        # return HttpResponse("ssh is not available yet")
 

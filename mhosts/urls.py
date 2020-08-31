@@ -16,6 +16,9 @@ urlpatterns = [
 
         # Page for adding a new group.
     url(r'^new_group/$', views.new_group, name='new_group'),
+
+        # Page for editing an group.
+    url(r'^edit_group/(?P<group_id>\d+)/$', views.edit_group, name='edit_group'),
     
     #Page for adding a new host.
     url(r'^new_host/(?P<group_id>\d+)/$', views.new_host, name='new_host'),
@@ -25,5 +28,8 @@ urlpatterns = [
 
     #connect to your host
     url(r'^categoria/([0-9]+)/$', views.connect, name='connect'),
-] + static("mstsc", document_root="./mhosts/static")
+
+        #configure IE browser
+    url(r'ieconfig/$', views.ieconfig, name='ieconfig'),
+]
 
