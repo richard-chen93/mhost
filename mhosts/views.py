@@ -196,7 +196,7 @@ def connect(request, host_id):
 
     # 否则调用ssh连接主机
     else:
-        context = {'ip': ip, 'uname': uname, 'upass': upass}
-        return render(request, 'mhosts/ssh.html', context)
-        # return HttpResponse("ssh is not available yet")
+        #context = {'ip': ip, 'uname': uname, 'upass': upass}
+        #return render(request, 'mhosts/ssh.html', context)
+        return HttpResponse("ssh is not available yet")
 
