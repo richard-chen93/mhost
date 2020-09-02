@@ -5,3 +5,5 @@ env_mhost/
 evn*/
 .vscode
 tmpfiles/
+*.csv
+*.exe

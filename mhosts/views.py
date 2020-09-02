@@ -16,7 +16,7 @@ def index(request):
 @login_required
 def groups(request):
     """Show all groups, and os_type"""
-    groups = Group.objects.filter(owner=request.user).order_by('date_added')
+    groups = Group.objects.filter(owner=request.user).order_by('id')
 
     ##
     # o = []
@@ -37,7 +37,7 @@ def group(request, group_id):
     # 确认请求的主题属于当前用户
     if group.owner != request.user:
         raise Http404
-    hosts = group.host_set.order_by('-date_added')
+    hosts = group.host_set.order_by('id')
     context = {'group': group, 'hosts': hosts}
     return render(request, 'mhosts/group.html', context)
 
@@ -198,5 +198,5 @@ def connect(request, host_id):
     else:
         #context = {'ip': ip, 'uname': uname, 'upass': upass}
         #return render(request, 'mhosts/ssh.html', context)
-        return HttpResponse("ssh is not available yet")
+        return HttpResponse("ssh is not available yet.........")
 
