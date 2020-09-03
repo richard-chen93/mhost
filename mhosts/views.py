@@ -188,9 +188,6 @@ def connect(request, host_id):
 
     # 若主机所属组是windows类型，调用远程桌面连接
     if group.os_type == 'windows':
-        # return HttpResponse(username)
-        # return HttpResponseRedirect('/mstsc/mstsc.html')
-        # return render(request, 'mhosts/connect.html')
         context = {'ip': ip, 'uname': uname, 'upass': upass}
         return render(request, 'mhosts/mstsc.html', context)
 

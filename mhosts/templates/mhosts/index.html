@@ -2,7 +2,7 @@
 
 {% block header %}
   <div class='jumbotron'>
-      <h1>Veoneer Server Login Platform</h1>        
+      <h1>Veoneer Server Login Platform</h1>   
   </div>
 {% endblock %}
 
@@ -20,4 +20,8 @@
     This application requires windows IE browser and some additional configs.
     Learn how to <a href="{% url 'mhosts:ieconfig' %}">aconfigure IE browser</a>.
   </h2>
+  {% load staticfiles %}
+  <div>
+    <img src="{% static "mhosts/images/veoneer.png" %}" alt="veoneer logo" />
+  </div>
 {% endblock %}

@@ -22,8 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'l5_4#_)!m32od3adxyycdc)shcpvgb92r4g90xob##br7y9--4'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# SECURITY WARNINGFalse: don't run with debug turned on in production!
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -111,4 +111,23 @@ LOGIN_URL = '/users/login/'
 
 BOOTSTRAP3 = {
     'include_jquery': True,
+}
+
+
+BOOTSTRAP3 = {
+
+    # The URL to the jQuery JavaScript file
+    'jquery_url': '/static/mhosts/js/jquery.min.js',
+
+    # The Bootstrap base URL
+    'base_url': '/static/mhosts/css/',
+
+    # The complete URL to the Bootstrap CSS file (None means derive it from base_url)
+    'css_url': '/static/mhosts/css/bootstrap.min.css',
+
+    # The complete URL to the Bootstrap CSS file (None means no theme)
+    'theme_url': '/static/mhosts/css/bootstrap.theme.min.css',
+
+    # The complete URL to the Bootstrap JavaScript file (None means derive it from base_url)
+    'javascript_url': '/static/mhosts/js/bootstrap.min.js',
 }
