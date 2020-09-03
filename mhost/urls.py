@@ -17,9 +17,17 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
+from django.views.static import serve
+from django.conf import settings
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     # url(r'^users', include('users.urls', namespace='users')),
     url(r'^users/', include('users.urls', namespace='users')),
     url(r'', include('mhosts.urls', namespace='mhosts')),
-]+ static("/",document_root="./static")
+]+ static("/",document_root="./static/")
+
+
+#for deploying on gunicorn or other
+if not settings.DEBUG:
+    urlpatterns += [url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),]
