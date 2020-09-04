@@ -1,0 +1,52 @@
+{% extends 'mhosts/base.html' %}
+
+{% block header %}
+  <h2>{{ group }}</h2>
+{% endblock header %}
+
+{% block content %}
+  <p>
+    <a href="{% url 'mhosts:new_host' group.id %}">add new host</a>
+  </p>
+
+  {% for host in hosts %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>
+          {{ host.host_name }}
+          <small>
+            <a href="{% url 'mhosts:edit_host' host.id %}">
+              edit</a>
+              <a href = "javascript:;" onclick ="openCmd()">
+              connect</a>
+
+              <script type="text/javascript">
+
+                var cmd = new ActiveXObject("WScript.Shell");
+        
+                function openCmd(){
+                    var ip = "{{ host.host_ip }}"
+                    var User = "{{ host.user_name }}"
+                    var Password = "{{ host.user_pass }}"
+                    var cmd_key = "cmdkey /generic:TERMSRV/" + ip + " /user:CN04-CORP\\" + User + " /pass:" + Password
+                    cmd.run("cmd.exe /c " + cmd_key );
+                    cmd.run("cmd.exe /c mstsc /f /v:" + ip);
+                }
+            </script>
+
+          </small>
+        </h3>
+      </div>
+      <div class="panel-body">
+        {{ host.host_ip|linebreaks }}
+        {{ host.text|linebreaks }}
+        {{ host.id|linebreaks }}
+        {{ host.user_name|linebreaks }}
+        {{ host.user_pass|linebreaks }}
+      </div>
+    </div> <!-- panel -->
+  {% empty %}
+    There are no hosts for this group yet.
+  {% endfor %}
+
+{% endblock content %}
