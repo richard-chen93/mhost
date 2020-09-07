@@ -44,7 +44,10 @@ def group(request, group_id):
     context = {
         'group': group, 'hosts': hosts, 
     }
-    return render(request, 'mhosts/group.html', context)
+    if group.os_type == 'windows':
+        return render(request, 'mhosts/win_group.html', context)
+    else:
+        return render(request, 'mhosts/linux_group.html', context)
 
 
 def new_group(request):

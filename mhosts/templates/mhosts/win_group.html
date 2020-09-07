@@ -26,11 +26,11 @@
     </h3>
   </div>
   <div id="{{host.id}}" class="panel-body">
+    <!-- {{ host.id|linebreaks }} -->
     {{ host.host_ip|linebreaks }}
+    <!-- {{ host.user_name|linebreaks }} -->
     {{ host.text|linebreaks }}
-    {{ host.id|linebreaks }}
-    {{ host.user_name|linebreaks }}
-    <!-- {{ host.user_pass|linebreaks }} -->
+
   </div>
 </div> <!-- panel -->
 <script type="text/javascript">
