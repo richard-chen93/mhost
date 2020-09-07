@@ -35,29 +35,16 @@ def group(request, group_id):
     """Show a single group, and all its hosts."""
 
     group = Group.objects.get(id=group_id)
-    # host = Host.objects.get(id=host_id)
     """find group and host query set in database"""
-
-    #新增
-    # ip = host.host_ip
-    # uid = host.id
-    # uname = host.user_name
-    # upass = host.user_pass
-
     # 确认请求的主题属于当前用户
     if group.owner != request.user:
         raise Http404
     hosts = group.host_set.order_by('id')
 
-#增加ip uname upass
     context = {
         'group': group, 'hosts': hosts, 
     }
-    # context = {
-    #     'group': group, 'hosts': hosts, 'ip': ip, 'uname': uname, 'upass': upass
-    # }
-    return render(request, 'mhosts/111group.html', context)
-
+    return render(request, 'mhosts/group.html', context)
 
 
 def new_group(request):
