@@ -91,6 +91,17 @@ def edit_group(request, group_id):
 
 
 @login_required
+def delete_group(request, group_id):
+    """delete an existing group."""
+    group = Group.objects.get(id=group_id)
+    if group.owner != request.user:
+        raise Http404
+
+    group.delete()
+    return HttpResponseRedirect(reverse('mhosts:groups'))
+
+
+@login_required
 def new_host(request, group_id):
     """Add a new host for a particular group."""
     group = Group.objects.get(id=group_id)
@@ -138,6 +149,18 @@ def edit_host(request, host_id):
 
     context = {'host': host, 'group': group, 'form': form}
     return render(request, 'mhosts/edit_host.html', context)
+
+
+@login_required
+def delete_host(request, host_id):
+    """delete an existing host."""
+    host = Host.objects.get(id=host_id)
+    group = host.group
+    if group.owner != request.user:
+        raise Http404
+
+    host.delete()
+    return HttpResponseRedirect(reverse('mhosts:group',args=[group.id]))
 
 #帮助文件 配置IE浏览器
 def ieconfig(request):

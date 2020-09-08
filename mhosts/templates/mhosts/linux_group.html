@@ -17,10 +17,12 @@
     <h3>
       {{ host.host_name }}
       <small>
+        <a href="{% url 'mhosts:delete_host' host.id %}">
+          delete</a>
         <a href="{% url 'mhosts:edit_host' host.id %}">
           edit</a>
         <a href="javascript:;" onclick="openCmd{{ host.id }}()">
-          connect</a>
+          connect_with_ssh</a>
 
       </small>
     </h3>

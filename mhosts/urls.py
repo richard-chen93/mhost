@@ -19,12 +19,18 @@ urlpatterns = [
 
         # Page for editing an group.
     url(r'^edit_group/(?P<group_id>\d+)/$', views.edit_group, name='edit_group'),
+
+        # Page for deleting an group.
+    url(r'^delete_group/(?P<group_id>\d+)/$', views.delete_group, name='delete_group'),
     
     #Page for adding a new host.
     url(r'^new_host/(?P<group_id>\d+)/$', views.new_host, name='new_host'),
     
     # Page for editing an host.
     url(r'^edit_host/(?P<host_id>\d+)/$', views.edit_host, name='edit_host'),
+
+    # Page for deleting an host.
+    url(r'^delete_host/(?P<host_id>\d+)/$', views.delete_host, name='delete_host'),
 
     #connect to your host
     url(r'^categoria/([0-9]+)/$', views.connect, name='connect'),
