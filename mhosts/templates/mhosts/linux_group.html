@@ -9,8 +9,6 @@
   <a href="{% url 'mhosts:new_host' group.id %}">add new host</a>
 </p>
 
-
-
 {% for host in hosts %}
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -19,37 +17,17 @@
       <small>
         <a href="{% url 'mhosts:edit_host' host.id %}">
           edit</a>
-        <!-- <a href="javascript:;" onclick="openCmd{{ host.id }}()">
-          connect</a> -->
-
-        <a>
-          connect through SSH is not available yet </a>
-
+        <a href="ssh://{{ host.host_ip }}">
+          connect via ssh with putty </a>
       </small>
     </h3>
   </div>
   <div id="{{host.id}}" class="panel-body">
-    <!-- {{ host.id|linebreaks }} -->
     {{ host.host_ip|linebreaks }}
-    <!-- {{ host.user_name|linebreaks }} -->
     {{ host.text|linebreaks }}
-    
-    <!-- {{ host.user_pass|linebreaks }} -->
   </div>
 </div> <!-- panel -->
-<script type="text/javascript">
 
-  var cmd = new ActiveXObject("WScript.Shell");
-
-  function openCmd{{ host.id }}() {
-    var ip = "{{ host.host_ip }}"
-    var User = "{{ host.user_name }}"
-    var Password = "{{ host.user_pass }}"
-    var cmd_key = "cmdkey /generic:TERMSRV/" + ip + " /user:CN04-CORP\\" + User + " /pass:" + Password
-    cmd.run("cmd.exe /c " + cmd_key);
-    cmd.run("cmd.exe /c mstsc /f /v:" + ip);
-  }
-</script>
 {% empty %}
 There are no hosts for this group yet.
 {% endfor %}

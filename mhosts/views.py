@@ -144,34 +144,10 @@ def ieconfig(request):
     return render(request, 'mhosts/ieconfig.html')
 
 
-#远程桌面连接函数
+#已不必使用的远程桌面连接函数
 @login_required
 def connect(request, host_id):
     """connect to the host."""
     host = Host.objects.get(id=host_id)
     """find host query set in database"""
-    
-    group = host.group
-    group_user = group.owner
-    
-    ip = host.host_ip
-    uid = host.id
-    uname = host.user_name
-    upass = host.user_pass
-
-    #username = "cn04-corp\\" + str(user)
-
-    if group.owner != request.user:
-        raise Http404
-
-    # 若主机所属组是windows类型，调用远程桌面连接
-    if group.os_type == 'windows':
-        context = {'ip': ip, 'uname': uname, 'upass': upass}
-        return render(request, 'mhosts/mstsc.html', context)
-
-    # 否则调用ssh连接主机
-    else:
-        #context = {'ip': ip, 'uname': uname, 'upass': upass}
-        #return render(request, 'mhosts/ssh.html', context)
-        return HttpResponse("ssh is not available yet.........")
 
