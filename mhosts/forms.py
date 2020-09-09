@@ -14,4 +14,10 @@ class HostForm(forms.ModelForm):
         fields = ['host_name', 'host_ip', 'user_name', 'user_pass', 'text']
         labels = {'text': 'description'}
         widgets = {'text': forms.Textarea(attrs={'cols': 30})}
-        # widgets = {'user_pass': forms.PasswordInput()}
+        widgets = {'user_pass': forms.PasswordInput(render_value = True)}
+
+# class SearchForm(forms.ModelForm):
+#     class Meta:
+#         model = Host
+#         fields = ['host_ip']
+#         labels = {'text': ''}

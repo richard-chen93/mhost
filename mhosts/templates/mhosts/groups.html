@@ -13,8 +13,23 @@
           <a>{{ o }}</a>
           <a href="{% url 'mhosts:group' group.id %}">{{ group }}</a>
           <a href="{% url 'mhosts:edit_group' group.id %}">edit</a>
+          <a href="{% url 'mhosts:delete_group' group.id %}" onclick="return deleteJob();">delete</a>
         </h3>
       </li>
+
+      <script type="text/javascript">
+      
+        function deleteJob()
+          {
+               if(confirm("delete this server group? This action will delete ALL servers inside the group!"))
+               {
+                   return true;
+               }else{
+                   return false;
+             }
+          }
+      
+      </script>
 
     {% empty %}
       <li>No groups have been added yet.</li>

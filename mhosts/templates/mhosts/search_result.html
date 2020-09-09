@@ -1,7 +1,7 @@
 {% extends 'mhosts/base.html' %}
 
 {% block header %}
-<h2>{{ group }}</h2>
+<h2>Query results in {{ group }}</h2>
 {% endblock header %}
 
 {% block content %}
@@ -63,7 +63,7 @@
 
 </script>
 {% empty %}
-There is no host in this group yet.
+Nothing here.
 {% endfor %}
 
 {% endblock content %}

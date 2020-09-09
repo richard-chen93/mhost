@@ -9,7 +9,10 @@
   <a href="{% url 'mhosts:new_host' group.id %}">add new host</a>
 </p>
 
-
+<form role="search" method="get" id="searchform" action="{% url 'mhosts:search_host' group.id %}">
+	<input type="search" name="q" placeholder="search hostname or IP" required>
+	<button type="submit">search</button>
+</form>
 
 {% for host in hosts %}
 <div class="panel panel-default">
@@ -17,7 +20,7 @@
     <h3>
       {{ host.host_name }}
       <small>
-        <a href="{% url 'mhosts:delete_host' host.id %}">
+        <a href="{% url 'mhosts:delete_host' host.id %}"onclick="return deleteJob();">
           delete</a>
         <a href="{% url 'mhosts:edit_host' host.id %}">
           edit</a>
@@ -36,15 +39,24 @@
   </div>
 </div> <!-- panel -->
 <script type="text/javascript">
-
   var cmd = new ActiveXObject("WScript.Shell");
-
   function openCmd{{ host.id }}() {
     cmd.run("cmd.exe /c putty -ssh -l {{ host.user_name }} -pw {{ host.user_pass }} -P 22 {{ host.host_ip }}" );
   }
+
+  function deleteJob()
+		{
+		     if(confirm("delete this server?"))
+		     {
+		         return true;
+		     }else{
+		         return false;
+			 }
+		}
+
 </script>
 {% empty %}
-There are no hosts for this group yet.
+There is no host in this group yet.
 {% endfor %}
 
 {% endblock content %}

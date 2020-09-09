@@ -25,6 +25,9 @@ urlpatterns = [
     
     #Page for adding a new host.
     url(r'^new_host/(?P<group_id>\d+)/$', views.new_host, name='new_host'),
+
+    #Page for searching a new host.
+    url(r'^search_host/(?P<group_id>\d+)/$', views.search_host, name='search_host'),
     
     # Page for editing an host.
     url(r'^edit_host/(?P<host_id>\d+)/$', views.edit_host, name='edit_host'),

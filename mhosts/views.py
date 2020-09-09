@@ -4,6 +4,9 @@ from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.core.urlresolvers import reverse
 from .models import Group, Host
 from .forms import GroupForm, HostForm
+# from .forms import SearchForm
+
+from django.db.models import Q
 
 from django.contrib.auth.decorators import login_required
 
@@ -126,6 +129,21 @@ def new_host(request, group_id):
 
     context = {'group': group, 'form': form}
     return render(request, 'mhosts/new_host.html', context)
+
+@login_required
+def search_host(request, group_id):
+    """search a new host in a particular group."""
+    group = Group.objects.get(id=group_id)
+    if group.owner != request.user:
+        raise Http404
+
+    q = request.GET.get('q')
+
+    qs = Host.objects.filter(group_id=group_id)
+    hosts = qs.filter(Q(host_ip__icontains=q)|Q(host_name__icontains=q))
+    
+    return render(request, 'mhosts/search_result.html', {'group': group, 'hosts': hosts})
+
 
 
 @login_required
