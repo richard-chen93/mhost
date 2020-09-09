@@ -18,6 +18,34 @@ manage host
 * python 3.4.3
 * django-bootstrap3==6.2.2
 
+## 部署时：
+* pip install gunicorn==19.3.0 -i http://mirrors.aliyun.com/pypi/simple --trusted-host=mirrors.aliyun.com
+
+* pip install django-bootstrap3==6.2.2 -i http://mirrors.aliyun.com/pypi/simple --trusted-host=mirrors.aliyun.com
+
+vim /root/mhost/gunicorn.conf.py
+
+import multiprocessing
+bind = "0.0.0.0:80"
+#绑定的ip与端口
+
+workers = 2
+#核心数
+
+errorlog = '/root/gunicorn/gunicorn.error.log'
+#发生错误时log的路径
+
+accesslog = '/root/gunicorn/gunicorn.access.log'
+#正常时的log路径
+#loglevel = 'debug'   #日志等级
+
+proc_name = 'gunicorn_mhost'
+#进程名
+
+* 配置完毕运行gunicorn，可写成启动脚本。执行此命令需要进入项目根目录mhost
+
+gunicorn mhost.wsgi:application -D -c /root/mhost/gunicorn.conf.py
+
 
 ## 待完善功能
 前端展示
