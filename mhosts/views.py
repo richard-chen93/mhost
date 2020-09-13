@@ -47,10 +47,11 @@ def group(request, group_id):
     context = {
         'group': group, 'hosts': hosts, 
     }
-    if group.os_type == 'windows':
-        return render(request, 'mhosts/win_group.html', context)
-    else:
-        return render(request, 'mhosts/linux_group.html', context)
+    # if group.os_type == 'windows':
+    #     return render(request, 'mhosts/win_group.html', context)
+    # else:
+    #     return render(request, 'mhosts/linux_group.html', context)
+    return render(request, 'mhosts/group.html', context)
 
 
 def new_group(request):
@@ -142,7 +143,7 @@ def search_host(request, group_id):
     qs = Host.objects.filter(group_id=group_id)
     hosts = qs.filter(Q(host_ip__icontains=q)|Q(host_name__icontains=q))
     
-    return render(request, 'mhosts/search_result.html', {'group': group, 'hosts': hosts})
+    return render(request, 'mhosts/group.html', {'group': group, 'hosts': hosts})
 
 
 
