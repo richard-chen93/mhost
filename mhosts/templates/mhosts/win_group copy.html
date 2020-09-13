@@ -20,12 +20,12 @@
     <h3>
       {{ host.host_name }}
       <small>
-        <a href="{% url 'mhosts:delete_host' host.id %}"onclick="return deleteJob();">
+        <a href="{% url 'mhosts:delete_host' host.id %}" onclick="return deleteJob();">
           delete</a>
         <a href="{% url 'mhosts:edit_host' host.id %}">
           edit</a>
         <a href="javascript:;" onclick="openCmd{{ host.id }}()">
-          connect_with_ssh</a>
+          connect_with_RDP</a>
 
       </small>
     </h3>
@@ -39,9 +39,16 @@
   </div>
 </div> <!-- panel -->
 <script type="text/javascript">
+
   var cmd = new ActiveXObject("WScript.Shell");
+
   function openCmd{{ host.id }}() {
-    cmd.run("cmd.exe /c putty -ssh -l {{ host.user_name }} -pw {{ host.user_pass }} -P 22 {{ host.host_ip }}" );
+    var ip = "{{ host.host_ip }}"
+    var User = "{{ host.user_name }}"
+    var Password = "{{ host.user_pass }}"
+    var cmd_key = "cmdkey /generic:TERMSRV/" + ip + " /user:CN04-CORP\\" + User + " /pass:" + Password
+    cmd.run("cmd.exe /c " + cmd_key);
+    cmd.run("cmd.exe /c mstsc /f /v:" + ip);
   }
 
   function deleteJob()

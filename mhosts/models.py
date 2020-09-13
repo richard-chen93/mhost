@@ -17,7 +17,7 @@ class Group(models.Model):
 class Host(models.Model):
     """a host that belongs to a group."""
     group = models.ForeignKey(Group)
-    text = models.TextField()
+    # text = models.TextField()
     # date_added = models.DateTimeField(auto_now_add=True)
 
     host_name = models.CharField(max_length=50)

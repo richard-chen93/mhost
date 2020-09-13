@@ -11,13 +11,7 @@ class GroupForm(forms.ModelForm):
 class HostForm(forms.ModelForm):
     class Meta:
         model = Host
-        fields = ['host_name', 'host_ip', 'user_name', 'user_pass', 'text']
-        labels = {'text': 'description'}
-        widgets = {'text': forms.Textarea(attrs={'cols': 30})}
+        fields = ['host_name', 'host_ip', 'user_name', 'user_pass']
+        labels = {'host_name': 'Host name'}
+        # widgets = {'text': forms.Textarea(attrs={'cols': 30})}
         widgets = {'user_pass': forms.PasswordInput(render_value = True)}
-
-# class SearchForm(forms.ModelForm):
-#     class Meta:
-#         model = Host
-#         fields = ['host_ip']
-#         labels = {'text': ''}
