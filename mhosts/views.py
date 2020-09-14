@@ -10,10 +10,14 @@ from django.db.models import Q
 
 from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def index(request):
     """The home page for mhost."""
-    return render(request, 'mhosts/index.html')
+    """Show all groups, and os_type"""
+    groups = Group.objects.filter(owner=request.user).order_by('id')
+    context = {'groups': groups}
+    return render(request, 'mhosts/groups.html', context)
+
 
 
 @login_required

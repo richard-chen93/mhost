@@ -1,41 +1,44 @@
 {% extends "mhosts/base.html" %}
 
 {% block header %}
-  <h1>Groups</h1>
+<h1>Groups</h1>
 {% endblock %}
 
 {% block content %}
 
-  <ul>
+<h3>
+<ul>
+  <table align="" border="0" cellpadding="0" cellspacing="0" width="500" height="49">
     {% for group in groups %}
-      <li>
-        <h3>
-          <a>{{ o }}</a>
-          <a href="{% url 'mhosts:group' group.id %}">{{ group }}</a>
-          <a href="{% url 'mhosts:edit_group' group.id %}">edit</a>
-          <a href="{% url 'mhosts:delete_group' group.id %}" onclick="return deleteJob();">delete</a>
-        </h3>
-      </li>
-
-      <script type="text/javascript">
-      
-        function deleteJob()
-          {
-               if(confirm("delete this server group? This action will delete ALL servers inside the group!"))
-               {
-                   return true;
-               }else{
-                   return false;
-             }
-          }
-      
-      </script>
-
+    <li>
+      <tbody>
+        <tr>
+          <td><a href="{% url 'mhosts:group' group.id %}">{{ group }}</a></td>
+          <td><a href="{% url 'mhosts:edit_group' group.id %}">edit</a></td>
+          <td><a href="{% url 'mhosts:delete_group' group.id %}" onclick="return deleteJob();">delete</a></td>
+        </tr>
+      </tbody>
+    </li>
     {% empty %}
-      <li>No groups have been added yet.</li>
+    <li>No groups have been added yet.</li>
     {% endfor %}
-  </ul>
-  
-  <h3><a href="{% url 'mhosts:new_group' %}">Add new group</h3>
+  </table>
+
+  <script type="text/javascript">
+
+    function deleteJob() {
+      if (confirm("delete this server group? This action will delete ALL servers inside the group!")) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+  </script>
+
+</ul>
+</h3>
+
+<h2><a href="{% url 'mhosts:new_group' %}">Add new group</h2>
 
 {% endblock content %}

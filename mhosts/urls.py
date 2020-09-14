@@ -7,7 +7,7 @@ from . import views
 
 urlpatterns = [
     # Home page.
-    url(r'^$', views.index, name='index'),
+    url(r'^$', views.groups, name='index_groups'),
         # Show all groups.
     url(r'^groups/$', views.groups, name='groups'),
     

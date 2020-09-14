@@ -11,7 +11,8 @@ class Group(models.Model):
     owner = models.ForeignKey(User)
     def __str__(self):
         """Return a string representation of the model."""
-        return self.text + r'(' + self.os_type + r')'
+        # return self.text + r'(' + self.os_type + r')'
+        return self.text
 
 
 class Host(models.Model):

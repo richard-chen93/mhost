@@ -1,14 +1,7 @@
 {% extends 'mhosts/base.html' %}
 
 {% block header %}
-<h2>
-  <table align="center" border="0" cellpadding="0" cellspacing="0" width="400" height="49">
-    <tr>
-      <th>{{ group }}&nbsp;&nbsp;&nbsp;&nbsp;</th><th>{{ group.os_type }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
-    </tr>
-  </table>
-  
-</h2>
+<h2>{{ group }}</h2>
 {% endblock header %}
 
 {% block content %}
@@ -23,30 +16,25 @@
 
 <h3 id="{{host.id}}">
   <table align="center" border="1" cellpadding="0" cellspacing="0" width="500" height="249">
-    <thead>
-      <tr>
-        <th>ID&nbsp;&nbsp;&nbsp;&nbsp;</th><th>Host name&nbsp;&nbsp;&nbsp;&nbsp;</th>
-        <th>IP Address&nbsp;&nbsp;&nbsp;&nbsp;</th><th>User Name&nbsp;&nbsp;&nbsp;&nbsp;</th>
-        <th colspan="2">actions&nbsp;&nbsp;&nbsp;</th>
-        <th colspan="2">console&nbsp;&nbsp;&nbsp;</th>
-      </tr>
-    </thead>
+    <tr>
+      <th>ID&nbsp;&nbsp;&nbsp;&nbsp;</th><th>Host name&nbsp;&nbsp;&nbsp;&nbsp;</th>
+      <th>IP Address&nbsp;&nbsp;&nbsp;&nbsp;</th><th>User Name&nbsp;&nbsp;&nbsp;&nbsp;</th>
+      <th>actions&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    </tr>
     {% for host in hosts %}
-    <tbody>
-      <tr>
-        <td>{{ host.id }}&nbsp;&nbsp;</td><td>{{ host.host_name }}&nbsp;&nbsp;</td>
-        <td>{{ host.host_ip }}&nbsp;</td><td>{{ host.user_name }}&nbsp;&nbsp;</td>
+    <tr>
+      <td>{{ host.id }}&nbsp;&nbsp;</td><td>{{ host.host_name }}&nbsp;&nbsp;</td>
+      <td>{{ host.host_ip }}&nbsp;</td><td>{{ host.user_name }}&nbsp;&nbsp;</td>
 
-        <td><a href="{% url 'mhosts:delete_host' host.id %}" onclick="return deleteJob();">
-          delete&nbsp;&nbsp;</a></td>
-        <td><a href="{% url 'mhosts:edit_host' host.id %}">
-          edit&nbsp;&nbsp;</a></td>
-        <td><a href="javascript:;" onclick="openRDP{{ host.id }}()">
-          RDP&nbsp;&nbsp;</a></td>
-        <td><a href="javascript:;" onclick="openSSH{{ host.id }}()">
-          SSH</a></td>
-      </tr>
-    </tbody>
+      <td><a href="{% url 'mhosts:delete_host' host.id %}" onclick="return deleteJob();">
+        delete&nbsp;&nbsp;</a></td>
+      <td><a href="{% url 'mhosts:edit_host' host.id %}">
+        edit&nbsp;&nbsp;</a></td>
+      <td><a href="javascript:;" onclick="openRDP{{ host.id }}()">
+        RDP&nbsp;&nbsp;</a></td>
+      <td><a href="javascript:;" onclick="openSSH{{ host.id }}()">
+        SSH</a></td>
+    </tr>
 
     <script type="text/javascript">
 
