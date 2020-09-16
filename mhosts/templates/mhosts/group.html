@@ -1,90 +1,89 @@
-{% extends 'mhosts/base.html' %}
-
-{% block header %}
+{% extends 'mhosts/base.html' %} {% block header %}
 <h2>
-  <table align="center" border="0" cellpadding="0" cellspacing="0" width="400" height="49">
-    <tr>
-      <th>{{ group }}&nbsp;&nbsp;&nbsp;&nbsp;</th><th>{{ group.os_type }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
-    </tr>
-  </table>
-  
-</h2>
-{% endblock header %}
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="400" height="49">
+        <tr>
+            <th>{{ group }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
+            <!-- <th>{{ group.os_type }}&nbsp;&nbsp;&nbsp;&nbsp;</th> -->
+        </tr>
+    </table>
 
-{% block content %}
+</h2>
+{% endblock header %} {% block content %}
 <p>
-  <a href="{% url 'mhosts:new_host' group.id %}">add new host</a>
+    <a href="{% url 'mhosts:new_host' group.id %}">add new host</a>
 </p>
 
 <form role="search" method="get" id="searchform" action="{% url 'mhosts:search_host' group.id %}">
-	<input type="search" name="q" placeholder="search hostname or IP" required>
-	<button type="submit">search</button>
+    <input type="search" name="q" placeholder="search hostname or IP" required>
+    <button type="submit">search</button>
 </form>
 
 <h3 id="{{host.id}}">
-  <table align="center" border="1" cellpadding="0" cellspacing="0" width="500" height="249">
-    <thead>
-      <tr>
-        <th>ID&nbsp;&nbsp;&nbsp;&nbsp;</th><th>Host name&nbsp;&nbsp;&nbsp;&nbsp;</th>
-        <th>IP Address&nbsp;&nbsp;&nbsp;&nbsp;</th><th>User Name&nbsp;&nbsp;&nbsp;&nbsp;</th>
-        <th colspan="2">actions&nbsp;&nbsp;&nbsp;</th>
-        <th colspan="2">console&nbsp;&nbsp;&nbsp;</th>
-      </tr>
-    </thead>
-    {% for host in hosts %}
-    <tbody>
-      <tr>
-        <td>{{ host.id }}&nbsp;&nbsp;</td><td>{{ host.host_name }}&nbsp;&nbsp;</td>
-        <td>{{ host.host_ip }}&nbsp;</td><td>{{ host.user_name }}&nbsp;&nbsp;</td>
+    <table align="center" border="1" cellpadding="0" cellspacing="0" width="500" height="249">
+        <thead>
+            <tr>
+                <th>ID&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>Host name&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>IP Address&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>User Name&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th colspan="2">actions&nbsp;&nbsp;&nbsp;</th>
+                <th colspan="2">console&nbsp;&nbsp;&nbsp;</th>
+            </tr>
+        </thead>
+        {% for host in hosts %}
+        <tbody>
+            <tr>
+                <td>{{ host.id }}&nbsp;&nbsp;</td>
+                <td>{{ host.host_name }}&nbsp;&nbsp;</td>
+                <td>{{ host.host_ip }}&nbsp;</td>
+                <td>{{ host.user_name }}&nbsp;&nbsp;</td>
 
-        <td><a href="{% url 'mhosts:delete_host' host.id %}" onclick="return deleteJob();">
+                <td><a href="{% url 'mhosts:delete_host' host.id %}" onclick="return deleteJob();">
           delete&nbsp;&nbsp;</a></td>
-        <td><a href="{% url 'mhosts:edit_host' host.id %}">
+                <td><a href="{% url 'mhosts:edit_host' host.id %}">
           edit&nbsp;&nbsp;</a></td>
-        <td><a href="javascript:;" onclick="openRDP{{ host.id }}()">
+                <td><a href="javascript:;" onclick="openRDP{{ host.id }}()">
           RDP&nbsp;&nbsp;</a></td>
-        <td><a href="javascript:;" onclick="openSSH{{ host.id }}()">
+                <td><a href="javascript:;" onclick="openSSH{{ host.id }}()">
           SSH</a></td>
-      </tr>
-    </tbody>
+            </tr>
+        </tbody>
 
-    <script type="text/javascript">
+        <script type="text/javascript">
+            var cmd = new ActiveXObject("WScript.Shell");
 
-      var cmd = new ActiveXObject("WScript.Shell");
-    
-      function openRDP{{ host.id }}() {
-        var ip = "{{ host.host_ip }}"
-        var User = "{{ host.user_name }}"
-        var Password = "{{ host.user_pass }}"
-        var cmd_key = "cmdkey /generic:TERMSRV/" + ip + " /user:CN04-CORP\\" + User + " /pass:" + Password
-        cmd.run("cmd.exe /c " + cmd_key);
-        cmd.run("cmd.exe /c mstsc /f /v:" + ip);
-      }
-    
-      function openSSH{{ host.id }}() {
-        cmd.run("cmd.exe /c putty -ssh -l {{ host.user_name }} -pw {{ host.user_pass }} -P 22 {{ host.host_ip }}" );
-      }
-    
-      function deleteJob()
-        {
-             if(confirm("delete this server?"))
-             {
-                 return true;
-             }else{
-                 return false;
-           }
-        }
-    
-    </script>
+            function openRDP {
+                {
+                    host.id
+                }
+            }() {
+                var ip = "{{ host.host_ip }}"
+                var User = "{{ host.user_name }}"
+                var Password = "{{ host.user_pass }}"
+                var cmd_key = "cmdkey /generic:TERMSRV/" + ip + " /user:CN04-CORP\\" + User + " /pass:" + Password
+                cmd.run("cmd.exe /c " + cmd_key);
+                cmd.run("cmd.exe /c mstsc /f /v:" + ip);
+            }
 
-    {% empty %}
-    There is no host in this group yet.
-    {% endfor %}
-  </table>
+            function openSSH {
+                {
+                    host.id
+                }
+            }() {
+                cmd.run("cmd.exe /c putty -ssh -l {{ host.user_name }} -pw {{ host.user_pass }} -P 22 {{ host.host_ip }}");
+            }
+
+            function deleteJob() {
+                if (confirm("delete this server?")) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        </script>
+
+        {% empty %} There is no host in this group yet. {% endfor %}
+    </table>
 </h3>
-
-
-
-
 
 {% endblock content %}

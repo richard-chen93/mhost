@@ -1,21 +1,13 @@
-{% extends "mhosts/base.html" %}
-{% load bootstrap3 %}
+{% extends "mhosts/base.html" %} {% load bootstrap3 %} {% block header %}
+<!-- <h2 class="abb">Log in to your account.</h2> -->
+<div class="abb">Log in to your account</div>
+{% endblock %} {% block content %}
 
-{% block header %}
-  <h2>Log in to your account.</h2>
-{% endblock %}
+<form method="post" action="{% url 'users:login' %}" class="form">
+    {% csrf_token %} {% bootstrap_form form %} {% buttons %}
+    <button name="submit" class="btn btn-primary">log in</button> {% endbuttons %}
 
-{% block content %}
-    
-  <form method="post" action="{% url 'users:login' %}" class="form">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-
-    {% buttons %}
-      <button name="submit" class="btn btn-primary">log in</button>
-    {% endbuttons %}
-    
     <input type="hidden" name="next" value="{% url 'mhosts:groups' %}" />
-  </form>
-    
+</form>
+
 {% endblock content %}

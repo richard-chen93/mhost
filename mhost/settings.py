@@ -104,7 +104,7 @@ STATICFILES_DIRS = (
 	os.path.join(BASE_DIR,'static'),
 )
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'mhosts/static')
 
 LOGIN_URL = '/users/login/'
 
@@ -122,6 +122,8 @@ BOOTSTRAP3 = {
 
     # The complete URL to the Bootstrap CSS file (None means derive it from base_url)
     'css_url': '/static/mhosts/css/bootstrap.min.css',
+    # 'css_url': '/static/mhosts/css/new.css',
+
 
     # The complete URL to the Bootstrap CSS file (None means no theme)
     'theme_url': '/static/mhosts/css/bootstrap.theme.min.css',

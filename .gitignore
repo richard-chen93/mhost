@@ -6,3 +6,4 @@ evn*/
 tmpfiles/
 *.csv
 *.exe
+migrations/

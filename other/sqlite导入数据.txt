@@ -1,0 +1,12 @@
+导入前确保用户和组都已建立。
+csv文件中第二列的组ID对应已建立的组的ID。此group组属于已存在的用户。
+
+./sqlite3.exe
+sqlite> .open database.db   #打开数据库
+sqlite> .database    #用于验证：显示目前连接的数据库路径
+sqlite> .table    #用于验证：显示这个数据库有哪些表格
+tableA
+sqlite> .separator ","  #指定分隔符为","
+sqlite> .import windows.csv mhosts_host   # 选定要导入的csv文件和数据库表
+
+
