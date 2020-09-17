@@ -46,41 +46,38 @@
           RDP&nbsp;&nbsp;</a></td>
                 <td><a href="javascript:;" onclick="openSSH{{ host.id }}()">
           SSH</a></td>
+
             </tr>
         </tbody>
 
-        <script type="text/javascript">
-            var cmd = new ActiveXObject("WScript.Shell");
+    <script type="text/javascript">
 
-            function openRDP {
-                {
-                    host.id
-                }
-            }() {
-                var ip = "{{ host.host_ip }}"
-                var User = "{{ host.user_name }}"
-                var Password = "{{ host.user_pass }}"
-                var cmd_key = "cmdkey /generic:TERMSRV/" + ip + " /user:CN04-CORP\\" + User + " /pass:" + Password
-                cmd.run("cmd.exe /c " + cmd_key);
-                cmd.run("cmd.exe /c mstsc /f /v:" + ip);
-            }
-
-            function openSSH {
-                {
-                    host.id
-                }
-            }() {
-                cmd.run("cmd.exe /c putty -ssh -l {{ host.user_name }} -pw {{ host.user_pass }} -P 22 {{ host.host_ip }}");
-            }
-
-            function deleteJob() {
-                if (confirm("delete this server?")) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        </script>
+      var cmd = new ActiveXObject("WScript.Shell");
+    
+      function openRDP{{ host.id }}() {
+        var ip = "{{ host.host_ip }}"
+        var User = "{{ host.user_name }}"
+        var Password = "{{ host.user_pass }}"
+        var cmd_key = "cmdkey /generic:TERMSRV/" + ip + " /user:CN04-CORP\\" + User + " /pass:" + Password
+        cmd.run("cmd.exe /c " + cmd_key);
+        cmd.run("cmd.exe /c mstsc /f /v:" + ip);
+      }
+    
+      function openSSH{{ host.id }}() {
+        cmd.run("cmd.exe /c putty -ssh -l {{ host.user_name }} -pw {{ host.user_pass }} -P 22 {{ host.host_ip }}" );
+      }
+    
+      function deleteJob()
+        {
+             if(confirm("delete this server?"))
+             {
+                 return true;
+             }else{
+                 return false;
+           }
+        }
+    
+    </script>
 
         {% empty %} There is no host in this group yet. {% endfor %}
     </table>

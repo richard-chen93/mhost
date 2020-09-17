@@ -1,8 +1,0 @@
-REGEDIT4
-[HKEY_CLASSES_ROOT\putty]
-@="URL:putty Protocol"
-"URL Protocol"=""
-[HKEY_CLASSES_ROOT\ssh\shell]
-[HKEY_CLASSES_ROOT\ssh\shell\open]
-[HKEY_CLASSES_ROOT\ssh\shell\open\command]
-@="\"C:\\putty.bat\" %1"
