@@ -8,10 +8,57 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Veoneer Server Login Platform</title>
+        <title>Veoneer Server Login Platform</title>
 
     {% bootstrap_css %} {% bootstrap_javascript %}
+    {% load staticfiles %}
 
+    <style>
+        body {
+            /* background-image: url("{% static "mhosts/images/back.jpg" %}"); */
+            background-color:#fdfcf8;
+        }
+        table{
+            width:100%;
+            margin:15px 0;
+            border:1;
+           
+        }
+        table th{
+            background-color:#96C7ED;
+            font-size:20px;
+            border:1px solid #73b4e7;
+            
+        }
+        table tr td{
+            font-size:18px;
+            color:black;
+            padding:4px;
+            border:1px solid #73b4e7;
+            border-collapse:collapse;
+        }
+        .adgr{
+            font-size:23px;
+        }
+        .groupname{
+            font-size:30px;
+            color:royalblue;
+            text-align:center;
+        }
+        .addnewhost{
+            font-size:23px;
+
+            text-align:left;
+           
+        }
+        .addnewhost a:visited{
+            color:brown;
+        }
+        .addnewhost a:hover{
+            color:red
+        }
+
+    </style>
 </head>
 
 <body>
@@ -19,7 +66,7 @@
     <!-- Static navbar -->
     <nav class="navbar navbar-default navbar-static-top ">
         <div class="container ">
-            < <div id="navbar " class="navbar-collapse collapse ">
+            <div id="navbar " class="navbar-collapse collapse ">
                 <h4>
                     <ul class="nav navbar-nav ">
                         <li><a href="{% url 'mhosts:groups' %} ">Server Groups</a></li>
@@ -52,6 +99,11 @@
 
     </div>
     <!-- /container -->
+
+
+
+
+
 
 </body>
 

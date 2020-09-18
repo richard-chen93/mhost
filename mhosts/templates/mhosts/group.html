@@ -1,17 +1,14 @@
 {% extends 'mhosts/base.html' %} {% block header %}
-<h2>
-    <table align="center" border="0" cellpadding="0" cellspacing="0" width="400" height="49">
-        <tr>
-            <th>{{ group }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
-            <!-- <th>{{ group.os_type }}&nbsp;&nbsp;&nbsp;&nbsp;</th> -->
-        </tr>
-    </table>
 
-</h2>
+<div class="groupname">{{ group }}</div>
+
 {% endblock header %} {% block content %}
-<p>
+<div class="addnewhost">
     <a href="{% url 'mhosts:new_host' group.id %}">add new host</a>
-</p>
+
+</div>
+    
+
 
 <form role="search" method="get" id="searchform" action="{% url 'mhosts:search_host' group.id %}">
     <input type="search" name="q" placeholder="search hostname or IP" required>
@@ -19,19 +16,19 @@
 </form>
 
 <h3 id="{{host.id}}">
-    <table align="center" border="1" cellpadding="0" cellspacing="0" width="500" height="249">
-        <thead>
+    <table >
+        
             <tr>
-                <th>ID&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                <th>Host name&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                <th>IP Address&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                <th>User Name&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                <th colspan="2">actions&nbsp;&nbsp;&nbsp;</th>
-                <th colspan="2">console&nbsp;&nbsp;&nbsp;</th>
+                <th>ID</th>
+                <th>Host name</th>
+                <th>IP Address</th>
+                <th>User Name</th>
+                <th colspan="2">actions</th>
+                <th colspan="2">console</th>
             </tr>
-        </thead>
+        
         {% for host in hosts %}
-        <tbody>
+        
             <tr>
                 <td>{{ host.id }}&nbsp;&nbsp;</td>
                 <td>{{ host.host_name }}&nbsp;&nbsp;</td>
@@ -48,7 +45,7 @@
           SSH</a></td>
 
             </tr>
-        </tbody>
+       
 
     <script type="text/javascript">
 

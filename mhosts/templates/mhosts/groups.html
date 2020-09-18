@@ -1,31 +1,26 @@
 {% extends "mhosts/base.html" %} {% block header %}
-<h1>Groups</h1>
+<div class="adgr">Groups <a href="{% url 'mhosts:new_group' %}">&nbsp;&nbsp;Add new group</a></div>
+
 {% endblock %} {% block content %}
-
-<h3>
-    <ul>
-        <table align="" border="1" cellpadding="0" cellspacing="0" width="500" height="49">
+        <table >
             <tr>
-                <th>Group Name&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                <th>Action&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                
+                <th>Group Name</th>
+                <th>Action</th>
+                <th>Action2</th>
+    
             </tr>
-        </table>
-    </ul>
-</h3>
-
-<h3>
-    <ul>
-        <table align="" border="1" cellpadding="0" cellspacing="0" width="500" height="49">
+        
             {% for group in groups %}
-            <li>
-                <tbody>
+           
+                
                     <tr>
                         <td><a href="{% url 'mhosts:group' group.id %}">{{ group }}</a></td>
                         <td><a href="{% url 'mhosts:edit_group' group.id %}">edit</a></td>
                         <td><a href="{% url 'mhosts:delete_group' group.id %}" onclick="return deleteJob();">delete</a></td>
                     </tr>
-                </tbody>
-            </li>
+                
+           
             {% empty %}
             <li>No groups have been added yet.</li>
             {% endfor %}
@@ -44,7 +39,7 @@
     </ul>
 </h3>
 
-<h2><a href="{% url 'mhosts:new_group' %}">Add new group</h2>
+
   
 
 {% endblock content %}
