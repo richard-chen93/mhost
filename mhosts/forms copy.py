@@ -15,6 +15,3 @@ class HostForm(forms.ModelForm):
         labels = {'host_name': 'Host name'}
         # widgets = {'text': forms.Textarea(attrs={'cols': 30})}
         widgets = {'user_pass': forms.PasswordInput(render_value = True)}
-
-        # widgets = {'host_name': forms.input(attrs={'class':'zxcv'})}
-        # widgets = {['host_name', 'host_ip', 'user_name']: forms.Textarea(attrs={'class':'zxcv'})}

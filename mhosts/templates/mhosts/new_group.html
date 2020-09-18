@@ -2,21 +2,35 @@
 {% load bootstrap3 %}
 
 {% block header %}
-  <h2>Add a new group:</h2>
+<style>
+  form {
+    font-size: 0px;
+  }
+  .btn-primary{
+    padding-left: 12px;
+    border-left-width: 1px;
+    /* margin-left: 500px; */
+    margin-left:40%;
+    width:20%;
+  
+  }
+</style>
+
+<h2><div class=addgroups>Add a new group</div></h2>
+
 {% endblock header %}
 
 {% block content %}
-    
-  <form action="{% url 'mhosts:new_group' %}" method='post'
-      class="form">
-      
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    
-    {% buttons %}
-      <button name="submit" class="btn btn-primary">add group</button>
-    {% endbuttons %}
-    
-  </form>
-    
+
+<form action="{% url 'mhosts:new_group' %}" method='post' class="form">
+
+  {% csrf_token %}
+  {% bootstrap_form form %}
+
+  {% buttons %}
+  <button name="submit" class="btn btn-primary">ADD GROUP</button>
+  {% endbuttons %}
+
+</form>
+
 {% endblock content %}

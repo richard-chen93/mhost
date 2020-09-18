@@ -1,10 +1,10 @@
 {% extends "mhosts/base.html" %}
 
 {% block content %}
-
+<div class="hostpage">
   <p><a href="{% url 'mhosts:group' group.id %}">{{ group }}</a></p>
-    
-  <p>Add a new host:</p>
+  <span>Add a new host</span>  
+  
   <form action="{% url 'mhosts:new_host' group.id %}" method='post'>
     {% csrf_token %}
     {{ form.as_p }}
@@ -12,5 +12,5 @@
 
     <button name='submit'>add host</button>
   </form>
-    
+</div>
 {% endblock content %}
