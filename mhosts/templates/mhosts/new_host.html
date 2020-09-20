@@ -1,6 +1,7 @@
 {% extends "mhosts/base.html" %}
 
 {% block content %}
+
 <div class="hostpage">
   <p><a href="{% url 'mhosts:group' group.id %}">{{ group }}</a></p>
   <span>Add a new host</span>  
@@ -10,7 +11,7 @@
     {{ form.as_p }}
     {{ form_name.as_p }}
 
-    <button name='submit'>add host</button>
+    <button name='submit'>ADD HOST</button>
   </form>
 </div>
 {% endblock content %}

@@ -30,17 +30,18 @@
         {% for host in hosts %}
         
             <tr>
-                <!-- <td>{{ host.id }}&nbsp;&nbsp;</td> -->
-                <td>{{ host.host_name }}&nbsp;&nbsp;</td>
-                <td>{{ host.host_ip }}&nbsp;</td>
-                <td>{{ host.user_name }}&nbsp;&nbsp;</td>
+                <!-- <td>{{ host.id }}</td> -->
+                <td>{{ host.host_name }}</td>
+                <td><a href="javascript:;" onclick="openSSH{{ host.id }}()">
+                    {{ host.host_ip }}</a></td>
+                <td>{{ host.user_name }}</td>
 
                 <td><a href="{% url 'mhosts:delete_host' host.id %}" onclick="return deleteJob();">
-          delete&nbsp;&nbsp;</a></td>
+          delete</a></td>
                 <td><a href="{% url 'mhosts:edit_host' host.id %}">
-          edit&nbsp;&nbsp;</a></td>
-                <td><a href="javascript:;" onclick="openRDP{{ host.id }}()">
-          RDP&nbsp;&nbsp;</a></td>
+          edit</a></td>
+                <!-- <td><a href="javascript:;" onclick="openRDP{{ host.id }}()">
+          RDP</a></td> -->
                 <td><a href="javascript:;" onclick="openSSH{{ host.id }}()">
           SSH</a></td>
 

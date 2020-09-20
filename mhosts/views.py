@@ -46,16 +46,21 @@ def group(request, group_id):
     # 确认请求的主题属于当前用户
     if group.owner != request.user:
         raise Http404
-    hosts = group.host_set.order_by('id')
+    hosts = group.host_set.order_by('host_ip')
+    #.count函数可以查询查询集的数量
+    #定义1-300的列表传递给render函数
+    # seq = {}
+    # seq['c'] = list(range(1,6))
 
     context = {
         'group': group, 'hosts': hosts, 
     }
-    # if group.os_type == 'windows':
-    #     return render(request, 'mhosts/win_group.html', context)
-    # else:
-    #     return render(request, 'mhosts/linux_group.html', context)
-    return render(request, 'mhosts/group.html', context)
+
+    if group.os_type == 'windows':
+        return render(request, 'mhosts/win_group.html', context)
+    else:
+        return render(request, 'mhosts/linux_group.html', context)
+    # return render(request, 'mhosts/group.html', context)
 
 
 def new_group(request):
@@ -146,8 +151,12 @@ def search_host(request, group_id):
 
     qs = Host.objects.filter(group_id=group_id)
     hosts = qs.filter(Q(host_ip__icontains=q)|Q(host_name__icontains=q))
-    
-    return render(request, 'mhosts/group.html', {'group': group, 'hosts': hosts})
+
+    context = {'group': group, 'hosts': hosts}
+    if group.os_type == 'windows':
+        return render(request, 'mhosts/win_group.html', context)
+    else:
+        return render(request, 'mhosts/linux_group.html', context)
 
 
 
@@ -190,10 +199,4 @@ def ieconfig(request):
     return render(request, 'mhosts/ieconfig.html')
 
 
-#已不必使用的远程桌面连接函数
-@login_required
-def connect(request, host_id):
-    """connect to the host."""
-    host = Host.objects.get(id=host_id)
-    """find host query set in database"""
 

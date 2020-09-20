@@ -35,9 +35,6 @@ urlpatterns = [
     # Page for deleting an host.
     url(r'^delete_host/(?P<host_id>\d+)/$', views.delete_host, name='delete_host'),
 
-    #connect to your host
-    url(r'^categoria/([0-9]+)/$', views.connect, name='connect'),
-
         #configure IE browser
     url(r'ieconfig/$', views.ieconfig, name='ieconfig'),
 ]

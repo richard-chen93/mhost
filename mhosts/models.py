@@ -22,7 +22,7 @@ class Host(models.Model):
     # date_added = models.DateTimeField(auto_now_add=True)
 
     host_name = models.CharField(max_length=50)
-    host_ip = models.CharField(max_length=50)
+    host_ip = models.GenericIPAddressField()
     
     user_name = models.CharField(max_length=50)
     user_pass = models.CharField(max_length=50)
