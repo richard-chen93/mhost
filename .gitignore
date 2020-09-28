@@ -4,6 +4,9 @@ env_mhost/
 evn*/
 .vscode
 tmpfiles/
+tmp/
+test/
+test.*
 *.csv
 *.exe
 migrations/

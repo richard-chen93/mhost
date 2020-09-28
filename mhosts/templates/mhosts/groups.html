@@ -1,7 +1,9 @@
-{% extends "mhosts/base.html" %} {% block header %}
+{% extends "mhosts/base.html" %} 
+{% block header %}
 <div class="adgr">Groups <a href="{% url 'mhosts:new_group' %}">&nbsp;&nbsp;Add new group</a></div>
+{% endblock %} 
 
-{% endblock %} {% block content %}
+{% block content %}
         <table >
             <tr>
                 
@@ -38,8 +40,4 @@
 
     </ul>
 </h3>
-
-
-  
-
 {% endblock content %}

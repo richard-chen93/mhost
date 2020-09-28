@@ -1,0 +1,37 @@
+{% extends "mhosts/base.html" %}
+ {% load bootstrap3 %}
+  {% block header %}
+<!-- <h2 class="abb">Log in to your account.</h2> -->
+<style>
+
+form{
+            font-size:0px;
+        }
+
+</style>
+{% load staticfiles %}
+<div class="test">
+<h1>
+<div class="logins">
+  <img src="{% static 'mhosts/images/logo.png' %}" alt="veoneer logo" />
+  
+</div>
+</h1>
+</div>
+{% endblock %} 
+
+{% block content %}
+
+<form method="post" action="{% url 'users:login' %}" class="form">
+    {% csrf_token %}
+    
+     {% bootstrap_form form %} 
+
+     <!-- {% buttons %} -->
+     
+    <button name="submit" class="btn btn-lg btn-primary btn-block">LOGIN</button> {% endbuttons %}
+
+    <input type="hidden" name="next" value="{% url 'mhosts:groups' %}" />
+</form>
+
+{% endblock content %}

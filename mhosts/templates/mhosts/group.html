@@ -1,8 +1,10 @@
-{% extends 'mhosts/base.html' %} {% block header %}
+{% extends 'mhosts/base.html' %} 
 
+{% block header %}
 <div class="groupname">{{ group }}</div>
+{% endblock header %} 
 
-{% endblock header %} {% block content %}
+{% block content %}
 <div class="addnewhost">
     <a href="{% url 'mhosts:new_host' group.id %}">add new host</a>
 

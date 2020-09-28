@@ -1,37 +1,71 @@
-{% extends "mhosts/base.html" %}
- {% load bootstrap3 %}
-  {% block header %}
-<!-- <h2 class="abb">Log in to your account.</h2> -->
-<style>
+{% load bootstrap3 %}
+<!doctype html>
+<html lang="en">
 
-form{
-            font-size:0px;
-        }
+<head>
+  <meta charset="utf-8">
 
-</style>
-{% load staticfiles %}
-<div class="test">
-<h1>
-<div class="logins">
-  <img src="{% static 'mhosts/images/logo.png' %}" alt="veoneer logo" />
-  
-</div>
-</h1>
-</div>
-{% endblock %} 
+  <title>veoneer server login platform</title>
 
-{% block content %}
+  {% load staticfiles %}
+  <link href="{% static 'users/assets/dist/css/bootstrap.min.css' %}" rel="stylesheet">
 
-<form method="post" action="{% url 'users:login' %}" class="form">
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+  <!-- Custom styles for this template -->
+
+  <link href="{% static 'users/floating-labels.css' %}" rel="stylesheet">
+</head>
+
+<body>
+  <!-- <form class="form-signin"> -->
+  <!-- <form method="post" action="{% url 'users:login' %}" class="form"> -->
+  <form method="post" action="{% url 'users:login' %}" class="form-signin">
+    <div class="text-center mb-4">
+      <img class="mb-4" src="{% static 'mhosts/images/logo.png' %}" alt="" width="300" height="72">
+      <!-- <img class="mb-4" src= "{% static 'users/assets/brand/bootstrap-solid.svg' %}" alt="" width="72" height="72"> -->
+      <!-- <h1 class="h3 mb-3 font-weight-normal">Log in to your account</h1> -->
+      <p>
+        <a href="{% url 'users:register' %} ">Register an account</a>
+        or login to manage your servers. Works in IE.
+      </p>
+    </div>
+
+    <!-- <div class="form-label-group">
+      <input type="text" id="id_username" class="form-control" placeholder="Username" required autofocus>
+      <label for="id_username">Username</label>
+    </div>
+
+    <div class="form-label-group">
+      <input type="password" id="id_password" class="form-control" placeholder="Password" required>
+      <label for="id_password">Password</label>
+    </div> -->
+
+    <!-- <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div> -->
     {% csrf_token %}
-    
-     {% bootstrap_form form %} 
-
-     <!-- {% buttons %} -->
-     
-    <button name="submit" class="btn btn-lg btn-primary btn-block">LOGIN</button> {% endbuttons %}
-
+    {% bootstrap_form form %}
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-muted text-center">&copy; 2020</p>
     <input type="hidden" name="next" value="{% url 'mhosts:groups' %}" />
-</form>
+  </form>
+</body>
 
-{% endblock content %}
+</html>

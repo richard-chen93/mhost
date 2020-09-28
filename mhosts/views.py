@@ -4,7 +4,6 @@ from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.core.urlresolvers import reverse
 from .models import Group, Host
 from .forms import GroupForm, HostForm
-# from .forms import SearchForm
 
 from django.db.models import Q
 
