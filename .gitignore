@@ -10,3 +10,4 @@ test.*
 *.csv
 *.exe
 migrations/
+.DS_Store
