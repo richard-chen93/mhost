@@ -87,7 +87,6 @@
       <!--导航条的头部（就是中北大学校徽那个地方）-->
       <div class="navbar-header">
         <img class="mb-4" src="{% static 'mhosts/images/logo.png' %}" alt="" width="200" height="30">
-
       </div>
       <!--导航链接部分 collapse,nav-collapse是说导航条是一个折叠导航条-->
       <div class="collapse navbar-collapse">
@@ -96,6 +95,7 @@
           <li><a href="#">首页</a></li>
           <li><a href="#">保留1</a></li>
           <li><a href="#">保留2</a></li>
+          <li><a href="#">保留3</a></li>
         </ul>
         <!-- 靠右的导航条登陆注册  navbar-right-->
         <ul class="nav navbar-nav navbar-right">
@@ -113,27 +113,26 @@
 
   </nav>
 
-  <a href="{% url 'mhosts:groups' %} ">Server Groups</a>
-  <ul>
-    {% block header %}{% endblock %}
-    {% block content %}{% endblock %}
-    <!-- <li class="collapse list-group-item"><a href="#">分组1</a></li> -->
-    <!-- <li class="collapse list-group-item"><a href="#">分组2</a></li> -->
+  <a data-toggle="collapse" href="#pp1" class="list-group-item" href="{% url 'mhosts:groups' %} ">Server Groups</a>
+  <ul class="collapse list-group" id="pp1" style="margin-bottom=0px">
+    <li class="collapse list-group-item"><a href="#">分组1</a></li>
+    <li class="collapse list-group-item"><a href="#">分组2</a></li>
+    <li class="collapse list-group-item"><a href="#">分组3</a></li>
   </ul>
-  <a>计划任务</a>
-  <ul>
-    <li><a href="#">关机</a></li>
-    <li><a href="#">重启</a></li>
+  <a data-toggle="collapse" href="#pp1" class="list-group-item" href="#pp2">计划任务</a>
+  <ul class="collapse list-group" id="pp2" style="margin-bottom=0px">
+    <li class="collapse list-group-item"><a href="#">关机</a></li>
+    <li class="collapse list-group-item"><a href="#">重启</a></li>
   </ul>
 
 
   <div class="container ">
 
     <div class="page-header ">
-        
+        {% block header %}{% endblock %}
     </div>
     <div>
-       
+        {% block content %}{% endblock %}
     </div>
   
   </div>

@@ -2,7 +2,11 @@
 
 {% block content %}
 <div class="hostpage">
-  <p><a href="{% url 'mhosts:group' group.id %}">{{ group }}</a></p>
+  <p>
+    <h3>
+      <a href="{% url 'mhosts:group' group.id %}">{{ group }}</a>
+    </h3>
+  </p>
     
   <span>Edit host:</span>
     
