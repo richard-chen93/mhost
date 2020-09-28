@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Veoneer Server Login Platform</title>
+
+  {% bootstrap_css %} {% bootstrap_javascript %}
+  {% load staticfiles %}
+
+  <style>
+    body {
+      /* background-image: url("{% static "mhosts/images/back.jpg" %}"); */
+      background-color: #fdfcf8;
+    }
+
+    table {
+      width: 100%;
+      margin: 15px 0;
+      border: 1;
+
+    }
+
+    table th {
+      background-color: #96C7ED;
+      font-size: 20px;
+      border: 1px solid #73b4e7;
+
+    }
+
+    table tr td {
+      font-size: 18px;
+      color: black;
+      padding: 4px;
+      border: 1px solid #73b4e7;
+      border-collapse: collapse;
+    }
+
+    .adgr {
+      font-size: 23px;
+    }
+
+    .groupname {
+      font-size: 30px;
+      color: royalblue;
+      text-align: center;
+    }
+
+    .addnewhost {
+      font-size: 23px;
+
+      text-align: left;
+
+    }
+
+    .addnewhost a:visited {
+      color: brown;
+    }
+
+    .addnewhost a:hover {
+      color: red
+    }
+  </style>
+</head>
+
+<body>
+  <!--navbar是nav导航标签的一个基类必须添加，navbar-default是对导航条样式的添加-->
+  <nav class="navbar navbar-default">
+    <!--导航具体内容要放到一个容器里增加一定边距，看起来好看-->
+    <div class="container">
+      <!--导航条的头部（就是中北大学校徽那个地方）-->
+      <div class="navbar-header">
+        <img src="商标图片" />
+      </div>
+      <!--导航链接部分 collapse,nav-collapse是说导航条是一个折叠导航条-->
+      <div class="collapse navbar-collapse">
+        <!--真正的链接部分是需要添加nav navbar-nav类的-->
+        <ul class="nav navbar-nav">
+          <li><a href="#">首页</a></li>
+          <li><a href="#">保留1</a></li>
+          <li><a href="#">保留2</a></li>
+          <li><a href="#">保留3</a></li>
+        </ul>
+        <!-- 靠右的导航条登陆注册  navbar-right-->
+        <ul class="nav navbar-nav navbar-right">
+          {% if user.is_authenticated %}
+          <li><a>Hello, {{ user.username }}.</a></li>
+          <li><a href="{% url 'users:logout' %} ">log out</a></li>
+          {% else %}
+          <li><a href="{% url 'users:register' %} ">register</a></li>
+          <li><a href="{% url 'users:login' %} ">log in</a></li>
+          {% endif %}
+        </ul>
+      </div>
+
+    </div>
+
+  </nav>
+
+  <a data-toggle="collapsee" href="#pp1" class="list-group-item" href="{% url 'mhosts:groups' %} ">Server Groups</a>
+  <ul class="collapse list-group" id="pp1" style="margin-bottom=0px">
+    <li class="collapse list-group-item"><a href="#">分组1</a></li>
+    <li class="collapse list-group-item"><a href="#">分组2</a></li>
+    <li class="collapse list-group-item"><a href="#">分组3</a></li>
+  </ul>
+  <a data-toggle="collapsee" href="#pp1" class="list-group-item" href="#pp2">计划任务</a>
+  <ul class="collapse list-group" id="pp2" style="margin-bottom=0px">
+    <li class="collapse list-group-item"><a href="#">关机</a></li>
+    <li class="collapse list-group-item"><a href="#">重启</a></li>
+  </ul>
+</body>
+
+<div class="container ">
+
+  <div class="page-header ">
+      {% block header %}{% endblock %}
+  </div>
+  <div>
+      {% block content %}{% endblock %}
+  </div>
+
+</div>
+<!-- /container -->
+
+</html>
