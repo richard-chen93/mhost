@@ -7,7 +7,7 @@
 manage host
 
 ## 功能：
-* 项目托管网址：http://www.valyriansteel.top
+* 项目托管网址：http://www.valyriansteel.top  测试账号密码 test test
 * 用户注册登录后可管理主机资产清单（描述、主机名、IP地址、所属组）
 * 用户可对自己的主机增删改查。最主要的功能是，点击连接按钮即可调用系统mstsc远程桌面或ssh登录主机。
 * ssh访问linux主机，调用系统RDP service可访问windows主机
