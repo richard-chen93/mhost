@@ -1,10 +1,10 @@
 # django调试服务器使用方法
 * 安装完git工具后，克隆此项目代码：git clone https://github.com/richard-chen93/mhost.git
 * 进入manager.py文件所在的项目根目录mhost。运行python manager.py migrate, 再执行python manage.py runserver 0.0.0.0:80即可启动django调试服务器。
-* 要运行服务器需要满足软件环境需求： django 1.8.4 , python 3.4.3 ， django-bootstrap3 6.2.2 。或者直接使用docker容器部署（推荐），直接执行命令：docker pull richardchen93/web:mhost_v1.1
+* 要运行服务器需要满足软件环境需求： django 1.8.4 , python 3.4.3 ， django-bootstrap3 6.2.2 。或者直接使用docker容器部署（推荐），直接执行命令：docker pull richardchen93/web:mhostv1
 
 # mhost
-manage host
+
 
 ## 功能：
 * 项目托管网址：http://www.valyriansteel.top  测试账号密码 test test
