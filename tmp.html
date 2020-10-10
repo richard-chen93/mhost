@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container ">
+
+        <div class="page-header ">
+
+            <!-- <h2 class="abb">Log in to your account.</h2> -->
+            <style>
+                form {
+                    font-size: 0px;
+                }
+            </style>
+
+            <div class="test">
+                <h1>
+                    <div class="logins">
+                        <img alt="veoneer logo" src="/static/mhosts/images/logo.png">
+
+                    </div>
+                </h1>
+            </div>
+
+        </div>
+        <div>
+
+
+            <form class="form" action="/users/login/" method="post">
+                <input name="csrfmiddlewaretoken" type="hidden" value="AABPux8rWpxt01RQXOHFC9dhATDdqhYN">
+
+                <div class="form-group"><label class="control-label" for="id_username">Username</label><input
+                        name="username" title="" class="form-control" id="id_username" required="required" type="text"
+                        maxlength="254" placeholder="Username"></div>
+                <div class="form-group"><label class="control-label" for="id_password">Password</label><input
+                        name="password" title="" class="form-control" id="id_password" required="required"
+                        type="password" placeholder="Password"></div>
+
+                <!-- <div class="form-group"> -->
+
+                <button name="submit" class="btn btn-lg btn-primary btn-block">LOGIN</button>
+            </form>
+        </div>
+
+        <input name="next" type="hidden" value="/groups/">
+
+
+
+    </div>
+</body>
+
+</html>
