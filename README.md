@@ -13,6 +13,10 @@
 * ssh访问linux主机，调用系统RDP service可访问windows主机
 * 用户在网页中访问主机时无需再输入被访问主机的账户密码
 
+## 使用方法：
+* windows服务器RDP连接功能需要通过IE浏览器的Active X控件实现，设置IE浏览器，将地址加入受信任站点，启用与Active空间相关的所有选项。
+* linux服务器的SSH连接功能需要客户端安装winSCP软件和putty软件，修改注册表使系统识别ssh链接的打开方式(通过winSCP调用putty打开，other目录下有注册表修改方法和putty调用的bat批处理文件，根据情况修改)。如 ssh://10.0.0.1
+
 ## 程序环境
 * django 1.8.4
 * python 3.4.3
@@ -48,4 +52,4 @@ gunicorn mhost.wsgi:application -D -c /root/mhost/gunicorn.conf.py
 
 
 ## 待完善功能
-前端展示
+侧面导航栏
