@@ -1,21 +1,23 @@
-# django调试服务器使用方法
-* 安装完git工具后，克隆此项目代码：git clone https://github.com/richard-chen93/mhost.git
-* 进入manager.py文件所在的项目根目录mhost。运行python manager.py migrate, 再执行python manage.py runserver 0.0.0.0:80即可启动django调试服务器。
-* 要运行服务器需要满足软件环境需求： django 1.8.4 , python 3.4.3 ， django-bootstrap3 6.2.2 。或者直接使用docker容器部署（推荐），直接执行命令：docker pull richardchen93/web:mhostv1
-
 # mhost
-
 
 ## 功能：
 * 项目托管网址：http://www.valyriansteel.top  测试账号密码 test test
-* 用户注册登录后可管理主机资产清单（描述、主机名、IP地址、所属组）
-* 用户可对自己的主机增删改查。最主要的功能是，点击连接按钮即可调用系统mstsc远程桌面或ssh登录主机。
-* ssh访问linux主机，调用系统RDP service可访问windows主机
-* 用户在网页中访问主机时无需再输入被访问主机的账户密码
+* 用户注册登录后可管理主机资产清单（主机名、IP地址、账户密码、所属组等），对自己的主机组和主机信息增删改查。
+* 选择特定主机后一键登录。windows组的主机使用rdp，linux或其他组的主机使用ssh。暂不支持选则3389和22之外的端口。如需要请改源码:mhost\mhosts\templates\win_group.html 和 linux_group.html
+
 
 ## 使用方法：
-* windows服务器RDP连接功能需要通过IE浏览器的Active X控件实现，设置IE浏览器，将地址加入受信任站点，启用与Active空间相关的所有选项。
-* linux服务器的SSH连接功能需要客户端安装winSCP软件和putty软件，修改注册表使系统识别ssh链接的打开方式(通过winSCP调用putty打开，other目录下有注册表修改方法和putty调用的bat批处理文件，根据情况修改)。如 ssh://10.0.0.1
+* windows服务器RDP连接功能需要通过IE浏览器的Active X控件实现，设置IE浏览器，将地址加入受信任站点，启用与Active控件相关的所有选项。
+```
+1、打开IE浏览器。
+2、在IE浏览器中找到工具按钮，单击即可。
+3、选择下面的“INTERNET选项”，并单击。
+4、然后点击“安全”这个选项，下面会出现相应的菜单。
+5、在接下来的页面中，选择“可信任站点”。
+6、接下来选择下方的“自定义级别”这个按钮。
+7、找到activex控件和插件，启用所有子项就可以啦。
+```
+* linux服务器的SSH连接功能需要客户端安装winSCP软件和putty软件（下载并设置环境变量），修改注册表使系统识别ssh链接的打开方式，如 ssh://10.0.0.1。(通过winSCP调用putty打开。可参考此项目源代码中other目录下的putty.bat和putty.reg。putty.reg用于修改注册表，putty.bat用于调用putty，根据情况修改)。
 
 ## 程序环境
 * django 1.8.4
@@ -52,4 +54,4 @@ gunicorn mhost.wsgi:application -D -c /root/mhost/gunicorn.conf.py
 
 
 ## 待完善功能
-侧面导航栏
+侧边导航栏
